@@ -46,14 +46,14 @@ function Header() {
         setOpenDialog(false);
         window.location.reload();
       })
-      .finally(() => setLoading(false)); // Moved setLoading(false) to finally block
+      .finally(() => setLoading(false));
   };
 
   return (
     <>
       <div className="p-3 shadow-sm flex justify-between items-center px-5">
         <a href="/">
-          <img src="/logo.svg" />
+          <img src="/logo.svg" alt="Logo" />
         </a>
         <div>
           {user ? (
@@ -75,6 +75,7 @@ function Header() {
                   <img
                     src={user?.picture}
                     className="h-[35px] w-[35px] rounded-full"
+                    alt="User avatar"
                   />
                 </PopoverTrigger>
                 <PopoverContent>
@@ -83,8 +84,8 @@ function Header() {
                       googleLogout();
                       localStorage.clear();
                       window.location.reload();
-                      className = "cursor-pointer";
                     }}
+                    className="cursor-pointer"
                   >
                     Logout
                   </Button>
@@ -95,17 +96,17 @@ function Header() {
             <Button onClick={() => setOpenDialog(true)}>Sign In</Button>
           )}
         </div>
-        <Dialog open={openDialog}>
+        <Dialog open={openDialog} onOpenChange={setOpenDialog}>
           <DialogContent>
             <DialogHeader>
               <DialogDescription>
-                <img src="/logo.svg" />
+                <img src="/logo.svg" alt="Logo" />
                 <h2 className="font-bold text-lg mt-7">Sign In with Google</h2>
                 <p>Sign in to the app with Google authentication securely</p>
                 <Button
                   onClick={login}
                   className="w-full mt-5 flex gap-4 items-center"
-                  disabled={loading} // Added disabled prop
+                  disabled={loading}
                 >
                   {loading ? (
                     <svg className="animate-spin h-7 w-7" viewBox="0 0 24 24">
